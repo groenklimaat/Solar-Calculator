@@ -5,17 +5,18 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Solar Panel Calculator | GroenKlimaat</title>
 
-<!-- PWA Meta Tags -->
-<link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#10B981">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="SolarCalc">
-<link rel="icon" type="image/png" href="icon-512.png">
+<link rel="apple-touch-icon" href="icon.svg">
+<link rel="icon" type="image/svg+xml" href="icon.svg">
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<link rel="manifest" href="manifest.json">
 
 <style>
 :root {
@@ -174,7 +175,7 @@ input[type="range"]::-webkit-slider-thumb {
   border-radius: 12px; margin-top: 24px;
 }
 .info-box h4 { color: var(--green-dark); margin-bottom: 10px; display: flex; align-items: center; gap: 10px; font-weight: 700; }
-.info-box p { color: var(--text-light); line-height: 1.7; font-size: 0.9rem; }
+.info-box p { color: var(--text-light); line-height: 1.8; font-size: 0.9rem; }
 footer { text-align: center; padding: 32px; background: var(--dark); color: white; margin-top: 40px; }
 .footer-content { max-width: 800px; margin: 0 auto; }
 footer p { margin-bottom: 8px; color: rgba(255, 255, 255, 0.6); font-size: 0.85rem; }
@@ -269,7 +270,7 @@ footer p { margin-bottom: 8px; color: rgba(255, 255, 255, 0.6); font-size: 0.85r
       <button class="calculate-btn" id="calculateBtn"><i class="fas fa-calculator"></i> <span data-i18n="calculateBtn">Calculate Yield</span></button>
       <div class="info-box">
         <h4><i class="fas fa-lightbulb"></i> <span data-i18n="infoTitle">Tips for maximum yield</span></h4>
-        <p data-i18n="infoText">• Southern orientation<br>• Tilt angle 20°-40°<br>• Shade-free installation<br>• Quality inverter</p>
+        <p data-i18n="infoText"></p>
       </div>
     </section>
 
@@ -335,13 +336,15 @@ footer p { margin-bottom: 8px; color: rgba(255, 255, 255, 0.6); font-size: 0.85r
 
 <script>
 // ============================================
-// SERVICE WORKER REGISTRATIE (via bestand)
+// SERVICE WORKER REGISTRATION
 // ============================================
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', function() {
-    navigator.serviceWorker.register('service-worker.js')
-      .then(function(reg) { console.log('✅ SW registered:', reg.scope); })
-      .catch(function(err) { console.log('⚠️ SW failed:', err.message); });
+    if (location.protocol === 'https:' || location.hostname === 'localhost') {
+      navigator.serviceWorker.register('service-worker.js')
+        .then(function(reg) { console.log('✅ SW:', reg.scope); })
+        .catch(function(err) { console.log('⚠️ SW:', err.message); });
+    }
   });
 }
 
@@ -384,13 +387,14 @@ const translations = {
     location: "Region / Solar irradiation", loc1: "Netherlands/Belgium (Average)", loc2: "Southern Europe (High)", loc3: "Northern Europe (Low)",
     roofAngle: "Roof tilt & Direction", roof1: "Ideal (South, 35°)", roof2: "Good (SE/SW, 25-45°)", roof3: "Fair (East/West, 15-55°)", roof4: "Suboptimal (North/Flat)",
     calculateBtn: "Calculate Yield", infoTitle: "Tips for maximum yield",
-    infoText: "• Southern orientation<br>• Tilt angle 20°-40°<br>• Shade-free installation<br>• Quality inverter",
+    infoText: "• Southern orientation (between SE and SW)<br>• Tilt angle between 20° and 40°<br>• Ensure shade-free installation<br>• Quality inverter for optimal efficiency",
     resultsTitle: "Calculation Results", totalPower: "Total Power", yearlyProduction: "Annual Production",
     dailyProduction: "Daily Production (avg.)", coverageRate: "Coverage Rate", ofConsumption: "of consumption",
     seasonalChart: "Seasonal Yield", monthlyChart: "Monthly Production",
     parameter: "Parameter", value: "Value", impact: "Impact on yield",
     panelType: "Panel type", inverterEff: "Inverter efficiency", temperature: "Temperature loss", systemLoss: "Total system loss",
-    footer1: "This calculator provides a realistic estimate.", footer2: "© 2026 GroenKlimaat",
+    footer1: "This calculator provides a realistic estimate. Actual yield may vary due to local conditions.",
+    footer2: "© 2026 GroenKlimaat | For professional advice, consult a certified installer.",
     months: ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],
     seasons: ["Winter","Spring","Summer","Autumn"]
   },
@@ -402,13 +406,14 @@ const translations = {
     location: "Regio / Zoninstraling", loc1: "Nederland/België (Gemiddeld)", loc2: "Zuid-Europa (Hoog)", loc3: "Noord-Europa (Laag)",
     roofAngle: "Dakhelling & Richting", roof1: "Ideaal (Zuid, 35°)", roof2: "Goed (ZO/ZW, 25-45°)", roof3: "Redelijk (O/W, 15-55°)", roof4: "Suboptimaal (Noord/Plat)",
     calculateBtn: "Bereken Opbrengst", infoTitle: "Tips voor maximale opbrengst",
-    infoText: "• Zuidelijke oriëntatie<br>• Hellingshoek 20°-40°<br>• Schaduwvrije installatie<br>• Kwalitatieve omvormer",
+    infoText: "• Zuidelijke oriëntatie (tussen ZO en ZW)<br>• Hellingshoek tussen 20° en 40°<br>• Zorg voor schaduwvrije installatie<br>• Kwalitatieve omvormer voor optimale efficiëntie",
     resultsTitle: "Berekeningsresultaten", totalPower: "Totaal Vermogen", yearlyProduction: "Jaaropbrengst",
     dailyProduction: "Dagopbrengst (gem.)", coverageRate: "Dekkingsgraad", ofConsumption: "van verbruik",
     seasonalChart: "Seizoensopbrengst", monthlyChart: "Maandelijkse Opbrengst",
     parameter: "Parameter", value: "Waarde", impact: "Impact op opbrengst",
     panelType: "Paneeltype", inverterEff: "Omvormer efficiëntie", temperature: "Temperatuurverlies", systemLoss: "Totaal systeemverlies",
-    footer1: "Deze calculator geeft een realistische schatting.", footer2: "© 2026 GroenKlimaat",
+    footer1: "Deze calculator geeft een realistische schatting. Werkelijke opbrengst kan variëren door lokale omstandigheden.",
+    footer2: "© 2026 GroenKlimaat | Voor professioneel advies raadpleeg een gecertificeerd installateur.",
     months: ["Jan","Feb","Mrt","Apr","Mei","Jun","Jul","Aug","Sep","Okt","Nov","Dec"],
     seasons: ["Winter","Lente","Zomer","Herfst"]
   },
@@ -417,16 +422,17 @@ const translations = {
     inputTitle: "Systemparameter", panelCount: "Anzahl der Panels", panelCountHint: "Typisch 8-16 für ein Haus",
     panelPower: "Leistung pro Panel (Wp)", panelPowerHint: "Moderne Panels: 350-550 Wp",
     efficiency: "Systemeffizienz (%)", efficiencyHint: "Beeinflusst durch Wechselrichter, Ausrichtung & Beschattung",
-    location: "Region / Sonneneinstrahlung", loc1: "Niederlande/Belgien", loc2: "Südeuropa (Hoch)", loc3: "Nordeuropa (Niedrig)",
+    location: "Region / Sonneneinstrahlung", loc1: "Niederlande/Belgien (Durchschnitt)", loc2: "Südeuropa (Hoch)", loc3: "Nordeuropa (Niedrig)",
     roofAngle: "Dachneigung & Richtung", roof1: "Ideal (Süd, 35°)", roof2: "Gut (SO/SW, 25-45°)", roof3: "Mäßig (O/W, 15-55°)", roof4: "Suboptimal (Nord/Flach)",
     calculateBtn: "Ertrag berechnen", infoTitle: "Tipps für maximalen Ertrag",
-    infoText: "• Südliche Ausrichtung<br>• Neigungswinkel 20°-40°<br>• Schattenfreie Installation<br>• Qualitätswechselrichter",
+    infoText: "• Südliche Ausrichtung (zwischen SO und SW)<br>• Neigungswinkel zwischen 20° und 40°<br>• Schattenfreie Installation sicherstellen<br>• Qualitätswechselrichter für optimale Effizienz",
     resultsTitle: "Berechnungsergebnisse", totalPower: "Gesamtleistung", yearlyProduction: "Jahresertrag",
-    dailyProduction: "Tagesertrag", coverageRate: "Abdeckungsgrad", ofConsumption: "des Verbrauchs",
+    dailyProduction: "Tagesertrag (Durchs.)", coverageRate: "Abdeckungsgrad", ofConsumption: "des Verbrauchs",
     seasonalChart: "Saisonaler Ertrag", monthlyChart: "Monatlicher Ertrag",
-    parameter: "Parameter", value: "Wert", impact: "Auswirkung",
+    parameter: "Parameter", value: "Wert", impact: "Auswirkung auf Ertrag",
     panelType: "Paneltyp", inverterEff: "Wechselrichterwirkungsgrad", temperature: "Temperaturverlust", systemLoss: "Gesamtsystemverlust",
-    footer1: "Dieser Rechner liefert eine realistische Schätzung.", footer2: "© 2026 GroenKlimaat",
+    footer1: "Dieser Rechner liefert eine realistische Schätzung. Der tatsächliche Ertrag kann aufgrund lokaler Bedingungen variieren.",
+    footer2: "© 2026 GroenKlimaat | Für professionelle Beratung einen zertifizierten Installateur konsultieren.",
     months: ["Jan","Feb","Mär","Apr","Mai","Jun","Jul","Aug","Sep","Okt","Nov","Dez"],
     seasons: ["Winter","Frühling","Sommer","Herbst"]
   },
@@ -435,16 +441,17 @@ const translations = {
     inputTitle: "Paramètres du Système", panelCount: "Nombre de panneaux", panelCountHint: "Typiquement 8-16 pour une maison",
     panelPower: "Puissance par panneau (Wc)", panelPowerHint: "Panneaux modernes: 350-550 Wc",
     efficiency: "Efficacité système (%)", efficiencyHint: "Affectée par l'onduleur, l'orientation & l'ombrage",
-    location: "Région / Ensoleillement", loc1: "Pays-Bas/Belgique", loc2: "Europe du Sud", loc3: "Europe du Nord",
+    location: "Région / Ensoleillement", loc1: "Pays-Bas/Belgique (Moyenne)", loc2: "Europe du Sud (Élevé)", loc3: "Europe du Nord (Faible)",
     roofAngle: "Inclinaison & Orientation", roof1: "Idéal (Sud, 35°)", roof2: "Bon (SE/SO, 25-45°)", roof3: "Moyen (E/O, 15-55°)", roof4: "Suboptimal (Nord/Plat)",
     calculateBtn: "Calculer le Rendement", infoTitle: "Conseils pour un rendement maximal",
-    infoText: "• Orientation sud<br>• Angle 20°-40°<br>• Installation sans ombre<br>• Onduleur de qualité",
+    infoText: "• Orientation sud (entre SE et SO)<br>• Angle d'inclinaison entre 20° et 40°<br>• Installation sans ombre<br>• Onduleur de qualité pour une efficacité optimale",
     resultsTitle: "Résultats du Calcul", totalPower: "Puissance Totale", yearlyProduction: "Production Annuelle",
     dailyProduction: "Production Quotidienne", coverageRate: "Taux de Couverture", ofConsumption: "de la consommation",
     seasonalChart: "Rendement Saisonnier", monthlyChart: "Production Mensuelle",
-    parameter: "Paramètre", value: "Valeur", impact: "Impact",
+    parameter: "Paramètre", value: "Valeur", impact: "Impact sur le rendement",
     panelType: "Type de panneau", inverterEff: "Efficacité de l'onduleur", temperature: "Perte de température", systemLoss: "Perte système totale",
-    footer1: "Cette calculatrice fournit une estimation réaliste.", footer2: "© 2026 GroenKlimaat",
+    footer1: "Cette calculatrice fournit une estimation réaliste. Le rendement réel peut varier selon les conditions locales.",
+    footer2: "© 2026 GroenKlimaat | Pour des conseils professionnels, consultez un installateur certifié.",
     months: ["Jan","Fév","Mar","Avr","Mai","Jun","Jul","Aoû","Sep","Oct","Nov","Déc"],
     seasons: ["Hiver","Printemps","Été","Automne"]
   },
@@ -453,16 +460,17 @@ const translations = {
     inputTitle: "Parámetros del Sistema", panelCount: "Número de paneles", panelCountHint: "Típicamente 8-16 para una casa",
     panelPower: "Potencia por panel (Wp)", panelPowerHint: "Paneles modernos: 350-550 Wp",
     efficiency: "Eficiencia del sistema (%)", efficiencyHint: "Afectada por el inversor, orientación y sombreado",
-    location: "Región / Irradiación solar", loc1: "Países Bajos/Bélgica", loc2: "Europa del Sur", loc3: "Europa del Norte",
+    location: "Región / Irradiación solar", loc1: "Países Bajos/Bélgica (Promedio)", loc2: "Europa del Sur (Alto)", loc3: "Europa del Norte (Bajo)",
     roofAngle: "Inclinación y Dirección", roof1: "Ideal (Sur, 35°)", roof2: "Bueno (SE/SO, 25-45°)", roof3: "Regular (E/O, 15-55°)", roof4: "Subóptimo (Norte/Plano)",
     calculateBtn: "Calcular Rendimiento", infoTitle: "Consejos para máximo rendimiento",
-    infoText: "• Orientación sur<br>• Ángulo 20°-40°<br>• Instalación sin sombras<br>• Inversor de calidad",
+    infoText: "• Orientación sur (entre SE y SO)<br>• Ángulo de inclinación entre 20° y 40°<br>• Instalación libre de sombras<br>• Inversor de calidad para eficiencia óptima",
     resultsTitle: "Resultados del Cálculo", totalPower: "Potencia Total", yearlyProduction: "Producción Anual",
     dailyProduction: "Producción Diaria", coverageRate: "Tasa de Cobertura", ofConsumption: "del consumo",
     seasonalChart: "Rendimiento Estacional", monthlyChart: "Producción Mensual",
-    parameter: "Parámetro", value: "Valor", impact: "Impacto",
-    panelType: "Tipo de panel", inverterEff: "Eficiencia del inversor", temperature: "Pérdida por temperatura", systemLoss: "Pérdida total",
-    footer1: "Esta calculadora proporciona una estimación realista.", footer2: "© 2026 GroenKlimaat",
+    parameter: "Parámetro", value: "Valor", impact: "Impacto en el rendimiento",
+    panelType: "Tipo de panel", inverterEff: "Eficiencia del inversor", temperature: "Pérdida por temperatura", systemLoss: "Pérdida total del sistema",
+    footer1: "Esta calculadora proporciona una estimación realista. El rendimiento real puede variar debido a condiciones locales.",
+    footer2: "© 2026 GroenKlimaat | Para asesoramiento profesional consulte a un instalador certificado.",
     months: ["Ene","Feb","Mar","Abr","May","Jun","Jul","Ago","Sep","Oct","Nov","Dic"],
     seasons: ["Invierno","Primavera","Verano","Otoño"]
   },
@@ -471,16 +479,17 @@ const translations = {
     inputTitle: "Parametri del Sistema", panelCount: "Numero di pannelli", panelCountHint: "Tipicamente 8-16 per una casa",
     panelPower: "Potenza per pannello (Wp)", panelPowerHint: "Pannelli moderni: 350-550 Wp",
     efficiency: "Efficienza sistema (%)", efficiencyHint: "Influenzata da inverter, orientamento & ombreggiamento",
-    location: "Regione / Irraggiamento", loc1: "Paesi Bassi/Belgio", loc2: "Europa del Sud", loc3: "Europa del Nord",
+    location: "Regione / Irraggiamento", loc1: "Paesi Bassi/Belgio (Media)", loc2: "Europa del Sud (Alto)", loc3: "Europa del Nord (Basso)",
     roofAngle: "Inclinazione & Direzione", roof1: "Ideale (Sud, 35°)", roof2: "Buono (SE/SO, 25-45°)", roof3: "Discreto (E/O, 15-55°)", roof4: "Subottimale (Nord/Piatto)",
     calculateBtn: "Calcola Resa", infoTitle: "Consigli per resa massima",
-    infoText: "• Orientamento sud<br>• Angolo 20°-40°<br>• Installazione senza ombre<br>• Inverter di qualità",
+    infoText: "• Orientamento sud (tra SE e SO)<br>• Angolo d'inclinazione tra 20° e 40°<br>• Installazione senza ombre<br>• Inverter di qualità per efficienza ottimale",
     resultsTitle: "Risultati Calcolo", totalPower: "Potenza Totale", yearlyProduction: "Produzione Annuale",
     dailyProduction: "Produzione Giornaliera", coverageRate: "Tasso di Copertura", ofConsumption: "del consumo",
     seasonalChart: "Resa Stagionale", monthlyChart: "Produzione Mensile",
-    parameter: "Parametro", value: "Valore", impact: "Impatto",
-    panelType: "Tipo pannello", inverterEff: "Efficienza inverter", temperature: "Perdita temperatura", systemLoss: "Perdita totale",
-    footer1: "Questo calcolatore fornisce una stima realistica.", footer2: "© 2026 GroenKlimaat",
+    parameter: "Parametro", value: "Valore", impact: "Impatto sulla resa",
+    panelType: "Tipo pannello", inverterEff: "Efficienza inverter", temperature: "Perdita temperatura", systemLoss: "Perdita sistema totale",
+    footer1: "Questo calcolatore fornisce una stima realistica. La resa effettiva può variare a causa delle condizioni locali.",
+    footer2: "© 2026 GroenKlimaat | Per consulenza professionale consulta un installatore certificato.",
     months: ["Gen","Feb","Mar","Apr","Mag","Giu","Lug","Ago","Set","Ott","Nov","Dic"],
     seasons: ["Inverno","Primavera","Estate","Autunno"]
   },
@@ -489,16 +498,17 @@ const translations = {
     inputTitle: "Systemparametere", panelCount: "Antall paneler", panelCountHint: "Vanligvis 8-16 for et hus",
     panelPower: "Effekt per panel (Wp)", panelPowerHint: "Moderne paneler: 350-550 Wp",
     efficiency: "Systemeffektivitet (%)", efficiencyHint: "Påvirket av inverter, orientering og skygge",
-    location: "Region / Solinnstråling", loc1: "Nederland/Belgia", loc2: "Sør-Europa", loc3: "Nord-Europa",
+    location: "Region / Solinnstråling", loc1: "Nederland/Belgia (Gjennomsnitt)", loc2: "Sør-Europa (Høy)", loc3: "Nord-Europa (Lav)",
     roofAngle: "Takets helning & Retning", roof1: "Ideell (Sør, 35°)", roof2: "Bra (SØ/SV, 25-45°)", roof3: "Greit (Ø/V, 15-55°)", roof4: "Suboptimal (Nord/Flatt)",
     calculateBtn: "Beregn Avkastning", infoTitle: "Tips for maksimal avkastning",
-    infoText: "• Sørlig orientering<br>• Helning 20°-40°<br>• Skyggefri installasjon<br>• Kvalitetsinverter",
+    infoText: "• Sørlig orientering (mellom SØ og SV)<br>• Helningsvinkel mellom 20° og 40°<br>• Sørg for skyggefri installasjon<br>• Kvalitetsinverter for optimal effektivitet",
     resultsTitle: "Beregningsresultater", totalPower: "Total Effekt", yearlyProduction: "Årlig Produksjon",
     dailyProduction: "Daglig Produksjon", coverageRate: "Dekningsgrad", ofConsumption: "av forbruk",
     seasonalChart: "Sesongavkastning", monthlyChart: "Månedlig Produksjon",
-    parameter: "Parameter", value: "Verdi", impact: "Innvirkning",
+    parameter: "Parameter", value: "Verdi", impact: "Innvirkning på avkastning",
     panelType: "Paneltype", inverterEff: "Invertereffektivitet", temperature: "Temperaturtap", systemLoss: "Totalt systemtap",
-    footer1: "Denne kalkulatoren gir et realistisk estimat.", footer2: "© 2026 GroenKlimaat",
+    footer1: "Denne kalkulatoren gir et realistisk estimat. Faktisk avkastning kan variere på grunn av lokale forhold.",
+    footer2: "© 2026 GroenKlimaat | For profesjonell rådgivning, kontakt en sertifisert installatør.",
     months: ["Jan","Feb","Mar","Apr","Mai","Jun","Jul","Aug","Sep","Okt","Nov","Des"],
     seasons: ["Vinter","Vår","Sommer","Høst"]
   },
@@ -507,16 +517,17 @@ const translations = {
     inputTitle: "Parametry Systemu", panelCount: "Liczba paneli", panelCountHint: "Zazwyczaj 8-16 dla domu",
     panelPower: "Moc na panel (Wp)", panelPowerHint: "Nowoczesne panele: 350-550 Wp",
     efficiency: "Wydajność systemu (%)", efficiencyHint: "Wpływ falownika, orientacji i zacienienia",
-    location: "Region / Nasłonecznienie", loc1: "Holandia/Belgia", loc2: "Europa Południowa", loc3: "Europa Północna",
+    location: "Region / Nasłonecznienie", loc1: "Holandia/Belgia (Średnie)", loc2: "Europa Południowa (Wysokie)", loc3: "Europa Północna (Niskie)",
     roofAngle: "Nachylenie i Kierunek", roof1: "Idealne (Południe, 35°)", roof2: "Dobre (PD-WS, 25-45°)", roof3: "Dostateczne (Wsch/Zach, 15-55°)", roof4: "Suboptymalne (Północ/Płaski)",
     calculateBtn: "Oblicz Wydajność", infoTitle: "Wskazówki dla maksymalnej wydajności",
-    infoText: "• Orientacja południowa<br>• Kąt 20°-40°<br>• Instalacja bez cienia<br>• Wysokiej jakości falownik",
+    infoText: "• Orientacja południowa (między PD-WS)<br>• Kąt nachylenia między 20° a 40°<br>• Zapewnij instalację bez cienia<br>• Wysokiej jakości falownik",
     resultsTitle: "Wyniki Obliczeń", totalPower: "Całkowita Moc", yearlyProduction: "Roczna Produkcja",
     dailyProduction: "Dzienna Produkcja", coverageRate: "Wskaźnik Pokrycia", ofConsumption: "zużycia",
     seasonalChart: "Wydajność Sezonowa", monthlyChart: "Produkcja Miesięczna",
-    parameter: "Parametr", value: "Wartość", impact: "Wpływ",
-    panelType: "Typ panelu", inverterEff: "Wydajność falownika", temperature: "Strata temperaturowa", systemLoss: "Całkowita strata",
-    footer1: "Ten kalkulator zapewnia realistyczne oszacowanie.", footer2: "© 2026 GroenKlimaat",
+    parameter: "Parametr", value: "Wartość", impact: "Wpływ na wydajność",
+    panelType: "Typ panelu", inverterEff: "Wydajność falownika", temperature: "Strata temperaturowa", systemLoss: "Całkowita strata systemu",
+    footer1: "Ten kalkulator zapewnia realistyczne oszacowanie. Rzeczywista wydajność może się różnić w zależności od warunków lokalnych.",
+    footer2: "© 2026 GroenKlimaat | Aby uzyskać profesjonalną poradę, skontaktuj się z certyfikowanym instalatorem.",
     months: ["Sty","Lut","Mar","Kwi","Maj","Cze","Lip","Sie","Wrz","Paź","Lis","Gru"],
     seasons: ["Zima","Wiosna","Lato","Jesień"]
   },
@@ -525,16 +536,17 @@ const translations = {
     inputTitle: "Systemparametrar", panelCount: "Antal paneler", panelCountHint: "Vanligtvis 8-16 för ett hus",
     panelPower: "Effekt per panel (Wp)", panelPowerHint: "Moderna paneler: 350-550 Wp",
     efficiency: "Systemeffektivitet (%)", efficiencyHint: "Påverkas av växelriktare, orientering och skuggning",
-    location: "Region / Solinstrålning", loc1: "Nederländerna/Belgien", loc2: "Södra Europa", loc3: "Norra Europa",
+    location: "Region / Solinstrålning", loc1: "Nederländerna/Belgien (Genomsnitt)", loc2: "Södra Europa (Hög)", loc3: "Norra Europa (Låg)",
     roofAngle: "Taklutning & Riktning", roof1: "Idealiskt (Söder, 35°)", roof2: "Bra (SO/SV, 25-45°)", roof3: "Okej (Ö/V, 15-55°)", roof4: "Suboptimalt (Norr/Platt)",
     calculateBtn: "Beräkna Avkastning", infoTitle: "Tips för maximal avkastning",
-    infoText: "• Sydlig orientering<br>• Lutning 20°-40°<br>• Skuggfri installation<br>• Kvalitetsväxelriktare",
+    infoText: "• Sydlig orientering (mellan SO och SV)<br>• Lutningsvinkel mellan 20° och 40°<br>• Säkerställ skuggfri installation<br>• Kvalitetsväxelriktare för optimal effektivitet",
     resultsTitle: "Beräkningsresultat", totalPower: "Total Effekt", yearlyProduction: "Årlig Produktion",
     dailyProduction: "Daglig Produktion", coverageRate: "Täckningsgrad", ofConsumption: "av förbrukning",
     seasonalChart: "Säsongsavkastning", monthlyChart: "Månatlig Produktion",
-    parameter: "Parameter", value: "Värde", impact: "Påverkan",
+    parameter: "Parameter", value: "Värde", impact: "Påverkan på avkastning",
     panelType: "Paneltyp", inverterEff: "Växelriktare effektivitet", temperature: "Temperaturförlust", systemLoss: "Total systemförlust",
-    footer1: "Denna kalkylator ger en realistisk uppskattning.", footer2: "© 2026 GroenKlimaat",
+    footer1: "Denna kalkylator ger en realistisk uppskattning. Faktisk avkastning kan variera på grund av lokala förhållanden.",
+    footer2: "© 2026 GroenKlimaat | För professionell rådgivning, kontakta en certifierad installatör.",
     months: ["Jan","Feb","Mar","Apr","Maj","Jun","Jul","Aug","Sep","Okt","Nov","Dec"],
     seasons: ["Vinter","Vår","Sommar","Höst"]
   },
@@ -543,16 +555,17 @@ const translations = {
     inputTitle: "Parâmetros do Sistema", panelCount: "Número de painéis", panelCountHint: "Tipicamente 8-16 para uma casa",
     panelPower: "Potência por painel (Wp)", panelPowerHint: "Painéis modernos: 350-550 Wp",
     efficiency: "Eficiência do sistema (%)", efficiencyHint: "Afetada pelo inversor, orientação e sombreamento",
-    location: "Região / Irradiação", loc1: "Países Baixos/Bélgica", loc2: "Sul da Europa", loc3: "Norte da Europa",
+    location: "Região / Irradiação solar", loc1: "Países Baixos/Bélgica (Média)", loc2: "Sul da Europa (Alto)", loc3: "Norte da Europa (Baixo)",
     roofAngle: "Inclinação e Direção", roof1: "Ideal (Sul, 35°)", roof2: "Bom (SE/SO, 25-45°)", roof3: "Razoável (L/O, 15-55°)", roof4: "Subótimo (Norte/Plano)",
     calculateBtn: "Calcular Rendimento", infoTitle: "Dicas para rendimento máximo",
-    infoText: "• Orientação sul<br>• Ângulo 20°-40°<br>• Instalação sem sombras<br>• Inversor de qualidade",
+    infoText: "• Orientação sul (entre SE e SO)<br>• Ângulo de inclinação entre 20° e 40°<br>• Garanta instalação sem sombras<br>• Inversor de qualidade para eficiência ideal",
     resultsTitle: "Resultados do Cálculo", totalPower: "Potência Total", yearlyProduction: "Produção Anual",
     dailyProduction: "Produção Diária", coverageRate: "Taxa de Cobertura", ofConsumption: "do consumo",
     seasonalChart: "Rendimento Sazonal", monthlyChart: "Produção Mensal",
-    parameter: "Parâmetro", value: "Valor", impact: "Impacto",
-    panelType: "Tipo de painel", inverterEff: "Eficiência do inversor", temperature: "Perda de temperatura", systemLoss: "Perda total",
-    footer1: "Esta calculadora fornece uma estimativa realista.", footer2: "© 2026 GroenKlimaat",
+    parameter: "Parâmetro", value: "Valor", impact: "Impacto no rendimento",
+    panelType: "Tipo de painel", inverterEff: "Eficiência do inversor", temperature: "Perda de temperatura", systemLoss: "Perda total do sistema",
+    footer1: "Esta calculadora fornece uma estimativa realista. O rendimento real pode variar devido às condições locais.",
+    footer2: "© 2026 GroenKlimaat | Para aconselhamento profissional, consulte um instalador certificado.",
     months: ["Jan","Fev","Mar","Abr","Mai","Jun","Jul","Ago","Set","Out","Nov","Dez"],
     seasons: ["Inverno","Primavera","Verão","Outono"]
   },
@@ -561,16 +574,17 @@ const translations = {
     inputTitle: "Parametri Systematis", panelCount: "Numerus panellorum", panelCountHint: "Fere 8-16 pro domo",
     panelPower: "Potentia per panellum (Wp)", panelPowerHint: "Panelli moderni: 350-550 Wp",
     efficiency: "Efficientia systematis (%)", efficiencyHint: "Affecta ab inversore, orientatione et umbra",
-    location: "Regio / Irradiatio", loc1: "Nederlandia/Belgia", loc2: "Europa Australis", loc3: "Europa Septentrionalis",
+    location: "Regio / Irradiatio", loc1: "Nederlandia/Belgia (Medium)", loc2: "Europa Australis (Altum)", loc3: "Europa Septentrionalis (Humile)",
     roofAngle: "Inclinatio et Directio", roof1: "Ideale (Meridies, 35°)", roof2: "Bonum (SE/SO, 25-45°)", roof3: "Satis (Oriens/Occidens, 15-55°)", roof4: "Suboptimum (Septentrio/Planum)",
     calculateBtn: "Computa Proventum", infoTitle: "Consilia pro maximo proventu",
-    infoText: "• Orientatio meridionalis<br>• Angulus 20°-40°<br>• Installatio sine umbra<br>• Inversor qualitatis",
+    infoText: "• Orientatio meridionalis (inter SE et SO)<br>• Angulus inclinationis inter 20° et 40°<br>• Cura ut installatio sine umbra sit<br>• Inversor qualitatis pro efficientia optima",
     resultsTitle: "Resultata Computationis", totalPower: "Potentia Totalis", yearlyProduction: "Productio Annua",
     dailyProduction: "Productio Quotidiana", coverageRate: "Ratio Tegumenti", ofConsumption: "consumptionis",
     seasonalChart: "Proventus Temporalis", monthlyChart: "Productio Menstrua",
-    parameter: "Parametrum", value: "Valor", impact: "Impactus",
-    panelType: "Typus panelli", inverterEff: "Efficientia inversoris", temperature: "Damnum temperaturae", systemLoss: "Damnum totale",
-    footer1: "Hic calculator aestimationem realisticam praebet.", footer2: "© 2026 GroenKlimaat",
+    parameter: "Parametrum", value: "Valor", impact: "Impactus in proventum",
+    panelType: "Typus panelli", inverterEff: "Efficientia inversoris", temperature: "Damnum temperaturae", systemLoss: "Damnum systematis totale",
+    footer1: "Hic calculator aestimationem realisticam praebet. Proventus verus variare potest propter condiciones locales.",
+    footer2: "© 2026 GroenKlimaat | Pro consilio professionali, consule installatorem certificatum.",
     months: ["Ian","Feb","Mar","Apr","Mai","Iun","Iul","Aug","Sep","Oct","Nov","Dec"],
     seasons: ["Hiems","Ver","Aestas","Autumnus"]
   },
@@ -579,16 +593,17 @@ const translations = {
     inputTitle: "系统参数", panelCount: "电池板数量", panelCountHint: "通常房屋需要 8-16 块",
     panelPower: "每块电池板功率 (峰瓦)", panelPowerHint: "现代电池板：350-550 峰瓦",
     efficiency: "系统效率 (%)", efficiencyHint: "受逆变器、方向和阴影影响",
-    location: "地区 / 太阳辐射", loc1: "荷兰/比利时", loc2: "南欧", loc3: "北欧",
+    location: "地区 / 太阳辐射", loc1: "荷兰/比利时 (平均)", loc2: "南欧 (高)", loc3: "北欧 (低)",
     roofAngle: "屋顶倾角和方向", roof1: "理想 (朝南, 35°)", roof2: "良好 (东南/西南, 25-45°)", roof3: "一般 (东/西, 15-55°)", roof4: "不理想 (朝北/平顶)",
     calculateBtn: "计算发电量", infoTitle: "最大发电量提示",
-    infoText: "• 朝南方向<br>• 倾斜角 20°-40°<br>• 无阴影安装<br>• 优质逆变器",
+    infoText: "• 朝南方向 (东南和西南之间)<br>• 倾斜角在 20° 至 40° 之间<br>• 确保无阴影安装<br>• 优质逆变器以获得最佳效率",
     resultsTitle: "计算结果", totalPower: "总功率", yearlyProduction: "年发电量",
-    dailyProduction: "日发电量", coverageRate: "覆盖率", ofConsumption: "的消耗量",
+    dailyProduction: "日发电量 (平均)", coverageRate: "覆盖率", ofConsumption: "的消耗量",
     seasonalChart: "季节性发电量", monthlyChart: "月发电量",
-    parameter: "参数", value: "数值", impact: "影响",
+    parameter: "参数", value: "数值", impact: "对发电量的影响",
     panelType: "电池板类型", inverterEff: "逆变器效率", temperature: "温度损失", systemLoss: "系统总损失",
-    footer1: "此计算器提供现实估算。", footer2: "© 2026 GroenKlimaat",
+    footer1: "此计算器提供现实估算。实际发电量可能因当地条件而异。",
+    footer2: "© 2026 GroenKlimaat | 专业建议请咨询认证安装人员。",
     months: ["1月","2月","3月","4月","5月","6月","7月","8月","9月","10月","11月","12月"],
     seasons: ["冬季","春季","夏季","秋季"]
   },
@@ -597,16 +612,17 @@ const translations = {
     inputTitle: "システムパラメータ", panelCount: "パネル数", panelCountHint: "一般的な家屋：8-16 枚",
     panelPower: "パネルあたりの電力 (峰ワット)", panelPowerHint: "現代パネル：350-550 峰ワット",
     efficiency: "システム効率 (%)", efficiencyHint: "インバーター、方位、影の影響を受けます",
-    location: "地域 / 日射量", loc1: "オランダ/ベルギー", loc2: "南ヨーロッパ", loc3: "北ヨーロッパ",
+    location: "地域 / 日射量", loc1: "オランダ/ベルギー (平均)", loc2: "南ヨーロッパ (高い)", loc3: "北ヨーロッパ (低い)",
     roofAngle: "屋根の傾斜と方角", roof1: "理想的 (南向き, 35°)", roof2: "良好 (南東/南西, 25-45°)", roof3: "普通 (東/西, 15-55°)", roof4: "最適でない (北向き/平ら)",
     calculateBtn: "発電量を計算", infoTitle: "最大発電量のためのヒント",
-    infoText: "• 南向き<br>• 傾斜角 20°-40°<br>• 影のない設置<br>• 高品質インバーター",
+    infoText: "• 南向き (南東と南西の間)<br>• 傾斜角 20°〜40°<br>• 影のない設置を確保<br>• 最適な効率のための高品質インバーター",
     resultsTitle: "計算結果", totalPower: "総電力", yearlyProduction: "年間発電量",
-    dailyProduction: "日次発電量", coverageRate: "カバレッジ率", ofConsumption: "消費量の",
+    dailyProduction: "日次発電量 (平均)", coverageRate: "カバレッジ率", ofConsumption: "消費量の",
     seasonalChart: "季節別発電量", monthlyChart: "月次発電量",
-    parameter: "パラメータ", value: "値", impact: "影響",
-    panelType: "パネルタイプ", inverterEff: "インバーター効率", temperature: "温度損失", systemLoss: "総損失",
-    footer1: "この計算機は現実的な推定値を提供します。", footer2: "© 2026 GroenKlimaat",
+    parameter: "パラメータ", value: "値", impact: "発電量への影響",
+    panelType: "パネルタイプ", inverterEff: "インバーター効率", temperature: "温度損失", systemLoss: "総システム損失",
+    footer1: "この計算機は現実的な推定値を提供します。実際の発電量は現地の条件により異なる場合があります。",
+    footer2: "© 2026 GroenKlimaat | 専門的なアドバイスについては認定設置業者にご相談ください。",
     months: ["1月","2月","3月","4月","5月","6月","7月","8月","9月","10月","11月","12月"],
     seasons: ["冬","春","夏","秋"]
   }
@@ -627,11 +643,18 @@ function changeLanguage(lang) {
   }
 }
 
+// ⭐ BELANGRIJK: Deze functie is aangepast om <br> tags correct te verwerken
 function translatePage() {
   document.querySelectorAll('[data-i18n]').forEach(element => {
     const key = element.getAttribute('data-i18n');
     if (translations[currentLanguage] && translations[currentLanguage][key]) {
-      element.textContent = translations[currentLanguage][key];
+      const text = translations[currentLanguage][key];
+      // Check of de tekst HTML bevat (voor <br> tags in infoText en footer)
+      if (text.indexOf('<br>') !== -1 || text.indexOf('<b>') !== -1 || text.indexOf('<i>') !== -1) {
+        element.innerHTML = text;
+      } else {
+        element.textContent = text;
+      }
     }
   });
   document.title = translations[currentLanguage]['title'];
