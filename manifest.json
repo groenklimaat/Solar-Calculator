@@ -1,14 +1,19 @@
 {
-  "name": "SolarCalc",
+  "name": "SolarCalc - Zonnepaneel Calculator",
   "short_name": "SolarCalc",
-  "description": "Bereken zonnepaneel vermogen, opbrengst en CO2-besparing.",
+  "description": "Gratis PWA om zonnepaneel vermogen, opbrengst en CO2-besparing te berekenen. Ondersteunt 13 talen.",
+  "lang": "nl",
+  "dir": "ltr",
   "start_url": "/Solar-Calculator/",
   "scope": "/Solar-Calculator/",
+  "id": "/Solar-Calculator/",
   "display": "standalone",
-  "orientation": "portrait",
+  "display_override": ["window-controls-overlay", "standalone", "minimal-ui"],
+  "orientation": "any",
   "background_color": "#ffffff",
   "theme_color": "#4a7dff",
-  "lang": "nl",
+  "categories": ["utilities", "productivity", "education"],
+  "prefer_related_applications": false,
   "icons": [
     {
       "src": "icon-192.png",
@@ -23,6 +28,12 @@
       "purpose": "any"
     },
     {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
       "src": "icon-512.png",
       "sizes": "512x512",
       "type": "image/png",
@@ -31,10 +42,33 @@
   ],
   "screenshots": [
     {
-      "src": "screenshot-1.png",
+      "src": "screenshot-wide.png",
       "sizes": "1280x720",
       "type": "image/png",
-      "form_factor": "wide"
+      "form_factor": "wide",
+      "label": "SolarCalc hoofdpagina"
+    },
+    {
+      "src": "screenshot-narrow.png",
+      "sizes": "720x1280",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "SolarCalc op mobiel"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Nieuwe berekening",
+      "short_name": "Bereken",
+      "description": "Start direct een nieuwe zonnepaneel berekening",
+      "url": "/Solar-Calculator/?action=new",
+      "icons": [
+        {
+          "src": "icon-192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
     }
   ]
 }
