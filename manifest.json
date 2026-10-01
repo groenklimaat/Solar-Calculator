@@ -1,17 +1,49 @@
 {
-  "name": "Solar Panel Calculator",
+  "id": "solarcalc-groenklimaat-v1",
+  "name": "Solar Panel Calculator - GroenKlimaat",
   "short_name": "SolarCalc",
-  "start_url": "/Solar-Calculator/",
-  "scope": "/Solar-Calculator/",
+  "description": "Free PWA to calculate solar panel power, yield and CO₂ savings. Supports 13 languages.",
+  "start_url": "./",
   "display": "standalone",
-  "background_color": "#0B2B40",
-  "theme_color": "#0B2B40",
+  "background_color": "#F8FAFC",
+  "theme_color": "#10B981",
+  "orientation": "any",
+  "lang": "en",
+  "categories": ["utilities", "productivity", "education"],
   "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
     {
       "src": "icon-512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "screenshot-1.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Main calculator view"
+    },
+    {
+      "src": "screenshot-2.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Results and charts"
     }
   ]
 }
