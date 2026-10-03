@@ -1,74 +1,28 @@
 {
-  "name": "SolarCalc - Zonnepaneel Calculator",
+  "name": "Solar Panel Calculator | GroenKlimaat",
   "short_name": "SolarCalc",
-  "description": "Gratis PWA om zonnepaneel vermogen, opbrengst en CO2-besparing te berekenen. Ondersteunt 13 talen.",
-  "lang": "nl",
-  "dir": "ltr",
-  "start_url": "/Solar-Calculator/",
-  "scope": "/Solar-Calculator/",
-  "id": "/Solar-Calculator/",
+  "description": "Calculate the yield of your solar panels",
+  "start_url": "index.html",
+  "scope": "/",
   "display": "standalone",
-  "display_override": ["window-controls-overlay", "standalone", "minimal-ui"],
+  "background_color": "#F8FAFC",
+  "theme_color": "#10B981",
   "orientation": "any",
-  "background_color": "#ffffff",
-  "theme_color": "#4a7dff",
-  "categories": ["utilities", "productivity", "education"],
-  "prefer_related_applications": false,
+  "lang": "en",
   "icons": [
     {
       "src": "icon-192.png",
       "sizes": "192x192",
       "type": "image/png",
-      "purpose": "any"
+      "purpose": "any maskable"
     },
     {
       "src": "icon-512.png",
       "sizes": "512x512",
       "type": "image/png",
-      "purpose": "any"
-    },
-    {
-      "src": "icon-192.png",
-      "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "maskable"
-    },
-    {
-      "src": "icon-512.png",
-      "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "maskable"
+      "purpose": "any maskable"
     }
   ],
-  "screenshots": [
-    {
-      "src": "screenshot-wide.png",
-      "sizes": "1280x720",
-      "type": "image/png",
-      "form_factor": "wide",
-      "label": "SolarCalc hoofdpagina"
-    },
-    {
-      "src": "screenshot-narrow.png",
-      "sizes": "720x1280",
-      "type": "image/png",
-      "form_factor": "narrow",
-      "label": "SolarCalc op mobiel"
-    }
-  ],
-  "shortcuts": [
-    {
-      "name": "Nieuwe berekening",
-      "short_name": "Bereken",
-      "description": "Start direct een nieuwe zonnepaneel berekening",
-      "url": "/Solar-Calculator/?action=new",
-      "icons": [
-        {
-          "src": "icon-192.png",
-          "sizes": "192x192",
-          "type": "image/png"
-        }
-      ]
-    }
-  ]
+  "categories": ["utilities", "productivity"],
+  "privacy_policy": "https://jouw-domein.nl/privacy.html"
 }
