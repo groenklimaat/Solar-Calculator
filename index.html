@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="SolarCalc">
-<link rel="apple-touch-icon" href="icon.svg">
+<link rel="apple-touch-icon" href="icon_512x512_192x192.png">
 <link rel="icon" type="image/svg+xml" href="icon.svg">
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -179,6 +179,8 @@ input[type="range"]::-webkit-slider-thumb {
 footer { text-align: center; padding: 32px; background: var(--dark); color: white; margin-top: 40px; }
 .footer-content { max-width: 800px; margin: 0 auto; }
 footer p { margin-bottom: 8px; color: rgba(255, 255, 255, 0.6); font-size: 0.85rem; }
+footer a { color: var(--green); text-decoration: none; font-weight: 600; transition: color 0.2s; }
+footer a:hover { color: #34D399; text-decoration: underline; }
 
 #installBtn {
   position: fixed; bottom: 24px; right: 24px;
@@ -206,20 +208,21 @@ footer p { margin-bottom: 8px; color: rgba(255, 255, 255, 0.6); font-size: 0.85r
 </head>
 <body>
 <div class="container">
+  <!-- Language selector: alphabetical order by English language name -->
   <div class="language-selector">
-    <button class="lang-btn active" data-lang="en">EN</button>
-    <button class="lang-btn" data-lang="nl">NL</button>
-    <button class="lang-btn" data-lang="de">DE</button>
-    <button class="lang-btn" data-lang="fr">FR</button>
-    <button class="lang-btn" data-lang="es">ES</button>
-    <button class="lang-btn" data-lang="it">IT</button>
-    <button class="lang-btn" data-lang="no">NO</button>
-    <button class="lang-btn" data-lang="pl">PL</button>
-    <button class="lang-btn" data-lang="sv">SV</button>
-    <button class="lang-btn" data-lang="pt">PT</button>
-    <button class="lang-btn" data-lang="la">LA</button>
     <button class="lang-btn" data-lang="zh">中文</button>
+    <button class="lang-btn" data-lang="nl">NL</button>
+    <button class="lang-btn active" data-lang="en">EN</button>
+    <button class="lang-btn" data-lang="fr">FR</button>
+    <button class="lang-btn" data-lang="de">DE</button>
+    <button class="lang-btn" data-lang="it">IT</button>
     <button class="lang-btn" data-lang="ja">日本語</button>
+    <button class="lang-btn" data-lang="la">LA</button>
+    <button class="lang-btn" data-lang="no">NO</button>
+    <button class="lang-btn" data-lang="pt">PT</button>
+    <button class="lang-btn" data-lang="es">ES</button>
+    <button class="lang-btn" data-lang="sv">SV</button>
+    <button class="lang-btn" data-lang="uk">UK</button>
   </div>
 
   <header>
@@ -327,6 +330,10 @@ footer p { margin-bottom: 8px; color: rgba(255, 255, 255, 0.6); font-size: 0.85r
   <footer>
     <div class="footer-content">
       <p data-i18n="footer1">This calculator provides a realistic estimate.</p>
+      <p>
+        <a href="privacy.html" data-i18n="privacyLink">Privacy Policy</a> ·
+        <a href="terms.html" data-i18n="termsLink">Terms and Conditions</a>
+      </p>
       <p data-i18n="footer2">© 2026 GroenKlimaat</p>
     </div>
   </footer>
@@ -395,6 +402,8 @@ const translations = {
     panelType: "Panel type", inverterEff: "Inverter efficiency", temperature: "Temperature loss", systemLoss: "Total system loss",
     footer1: "This calculator provides a realistic estimate. Actual yield may vary due to local conditions.",
     footer2: "© 2026 GroenKlimaat | For professional advice, consult a certified installer.",
+    privacyLink: "Privacy Policy",
+    termsLink: "Terms and Conditions",
     months: ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],
     seasons: ["Winter","Spring","Summer","Autumn"]
   },
@@ -414,6 +423,8 @@ const translations = {
     panelType: "Paneeltype", inverterEff: "Omvormer efficiëntie", temperature: "Temperatuurverlies", systemLoss: "Totaal systeemverlies",
     footer1: "Deze calculator geeft een realistische schatting. Werkelijke opbrengst kan variëren door lokale omstandigheden.",
     footer2: "© 2026 GroenKlimaat | Voor professioneel advies raadpleeg een gecertificeerd installateur.",
+    privacyLink: "Privacybeleid",
+    termsLink: "Algemene Voorwaarden",
     months: ["Jan","Feb","Mrt","Apr","Mei","Jun","Jul","Aug","Sep","Okt","Nov","Dec"],
     seasons: ["Winter","Lente","Zomer","Herfst"]
   },
@@ -433,6 +444,8 @@ const translations = {
     panelType: "Paneltyp", inverterEff: "Wechselrichterwirkungsgrad", temperature: "Temperaturverlust", systemLoss: "Gesamtsystemverlust",
     footer1: "Dieser Rechner liefert eine realistische Schätzung. Der tatsächliche Ertrag kann aufgrund lokaler Bedingungen variieren.",
     footer2: "© 2026 GroenKlimaat | Für professionelle Beratung einen zertifizierten Installateur konsultieren.",
+    privacyLink: "Datenschutz",
+    termsLink: "AGB",
     months: ["Jan","Feb","Mär","Apr","Mai","Jun","Jul","Aug","Sep","Okt","Nov","Dez"],
     seasons: ["Winter","Frühling","Sommer","Herbst"]
   },
@@ -452,6 +465,8 @@ const translations = {
     panelType: "Type de panneau", inverterEff: "Efficacité de l'onduleur", temperature: "Perte de température", systemLoss: "Perte système totale",
     footer1: "Cette calculatrice fournit une estimation réaliste. Le rendement réel peut varier selon les conditions locales.",
     footer2: "© 2026 GroenKlimaat | Pour des conseils professionnels, consultez un installateur certifié.",
+    privacyLink: "Confidentialité",
+    termsLink: "Conditions d'utilisation",
     months: ["Jan","Fév","Mar","Avr","Mai","Jun","Jul","Aoû","Sep","Oct","Nov","Déc"],
     seasons: ["Hiver","Printemps","Été","Automne"]
   },
@@ -471,6 +486,8 @@ const translations = {
     panelType: "Tipo de panel", inverterEff: "Eficiencia del inversor", temperature: "Pérdida por temperatura", systemLoss: "Pérdida total del sistema",
     footer1: "Esta calculadora proporciona una estimación realista. El rendimiento real puede variar debido a condiciones locales.",
     footer2: "© 2026 GroenKlimaat | Para asesoramiento profesional consulte a un instalador certificado.",
+    privacyLink: "Privacidad",
+    termsLink: "Términos y condiciones",
     months: ["Ene","Feb","Mar","Abr","May","Jun","Jul","Ago","Sep","Oct","Nov","Dic"],
     seasons: ["Invierno","Primavera","Verano","Otoño"]
   },
@@ -490,6 +507,8 @@ const translations = {
     panelType: "Tipo pannello", inverterEff: "Efficienza inverter", temperature: "Perdita temperatura", systemLoss: "Perdita sistema totale",
     footer1: "Questo calcolatore fornisce una stima realistica. La resa effettiva può variare a causa delle condizioni locali.",
     footer2: "© 2026 GroenKlimaat | Per consulenza professionale consulta un installatore certificato.",
+    privacyLink: "Privacy",
+    termsLink: "Termini e condizioni",
     months: ["Gen","Feb","Mar","Apr","Mag","Giu","Lug","Ago","Set","Ott","Nov","Dic"],
     seasons: ["Inverno","Primavera","Estate","Autunno"]
   },
@@ -509,6 +528,8 @@ const translations = {
     panelType: "Paneltype", inverterEff: "Invertereffektivitet", temperature: "Temperaturtap", systemLoss: "Totalt systemtap",
     footer1: "Denne kalkulatoren gir et realistisk estimat. Faktisk avkastning kan variere på grunn av lokale forhold.",
     footer2: "© 2026 GroenKlimaat | For profesjonell rådgivning, kontakt en sertifisert installatør.",
+    privacyLink: "Personvern",
+    termsLink: "Vilkår",
     months: ["Jan","Feb","Mar","Apr","Mai","Jun","Jul","Aug","Sep","Okt","Nov","Des"],
     seasons: ["Vinter","Vår","Sommer","Høst"]
   },
@@ -528,6 +549,8 @@ const translations = {
     panelType: "Typ panelu", inverterEff: "Wydajność falownika", temperature: "Strata temperaturowa", systemLoss: "Całkowita strata systemu",
     footer1: "Ten kalkulator zapewnia realistyczne oszacowanie. Rzeczywista wydajność może się różnić w zależności od warunków lokalnych.",
     footer2: "© 2026 GroenKlimaat | Aby uzyskać profesjonalną poradę, skontaktuj się z certyfikowanym instalatorem.",
+    privacyLink: "Polityka prywatności",
+    termsLink: "Regulamin",
     months: ["Sty","Lut","Mar","Kwi","Maj","Cze","Lip","Sie","Wrz","Paź","Lis","Gru"],
     seasons: ["Zima","Wiosna","Lato","Jesień"]
   },
@@ -547,6 +570,8 @@ const translations = {
     panelType: "Paneltyp", inverterEff: "Växelriktare effektivitet", temperature: "Temperaturförlust", systemLoss: "Total systemförlust",
     footer1: "Denna kalkylator ger en realistisk uppskattning. Faktisk avkastning kan variera på grund av lokala förhållanden.",
     footer2: "© 2026 GroenKlimaat | För professionell rådgivning, kontakta en certifierad installatör.",
+    privacyLink: "Integritetspolicy",
+    termsLink: "Villkor",
     months: ["Jan","Feb","Mar","Apr","Maj","Jun","Jul","Aug","Sep","Okt","Nov","Dec"],
     seasons: ["Vinter","Vår","Sommar","Höst"]
   },
@@ -566,6 +591,8 @@ const translations = {
     panelType: "Tipo de painel", inverterEff: "Eficiência do inversor", temperature: "Perda de temperatura", systemLoss: "Perda total do sistema",
     footer1: "Esta calculadora fornece uma estimativa realista. O rendimento real pode variar devido às condições locais.",
     footer2: "© 2026 GroenKlimaat | Para aconselhamento profissional, consulte um instalador certificado.",
+    privacyLink: "Privacidade",
+    termsLink: "Termos e condições",
     months: ["Jan","Fev","Mar","Abr","Mai","Jun","Jul","Ago","Set","Out","Nov","Dez"],
     seasons: ["Inverno","Primavera","Verão","Outono"]
   },
@@ -585,6 +612,8 @@ const translations = {
     panelType: "Typus panelli", inverterEff: "Efficientia inversoris", temperature: "Damnum temperaturae", systemLoss: "Damnum systematis totale",
     footer1: "Hic calculator aestimationem realisticam praebet. Proventus verus variare potest propter condiciones locales.",
     footer2: "© 2026 GroenKlimaat | Pro consilio professionali, consule installatorem certificatum.",
+    privacyLink: "Secretum",
+    termsLink: "Termini",
     months: ["Ian","Feb","Mar","Apr","Mai","Iun","Iul","Aug","Sep","Oct","Nov","Dec"],
     seasons: ["Hiems","Ver","Aestas","Autumnus"]
   },
@@ -604,6 +633,8 @@ const translations = {
     panelType: "电池板类型", inverterEff: "逆变器效率", temperature: "温度损失", systemLoss: "系统总损失",
     footer1: "此计算器提供现实估算。实际发电量可能因当地条件而异。",
     footer2: "© 2026 GroenKlimaat | 专业建议请咨询认证安装人员。",
+    privacyLink: "隐私政策",
+    termsLink: "条款和条件",
     months: ["1月","2月","3月","4月","5月","6月","7月","8月","9月","10月","11月","12月"],
     seasons: ["冬季","春季","夏季","秋季"]
   },
@@ -623,8 +654,31 @@ const translations = {
     panelType: "パネルタイプ", inverterEff: "インバーター効率", temperature: "温度損失", systemLoss: "総システム損失",
     footer1: "この計算機は現実的な推定値を提供します。実際の発電量は現地の条件により異なる場合があります。",
     footer2: "© 2026 GroenKlimaat | 専門的なアドバイスについては認定設置業者にご相談ください。",
+    privacyLink: "プライバシーポリシー",
+    termsLink: "利用規約",
     months: ["1月","2月","3月","4月","5月","6月","7月","8月","9月","10月","11月","12月"],
     seasons: ["冬","春","夏","秋"]
+  },
+  uk: {
+    title: "Калькулятор сонячних панелей", subtitle: "Точно розрахуйте потужність і виробіток вашої сонячної системи",
+    inputTitle: "Параметри системи", panelCount: "Кількість панелей", panelCountHint: "Зазвичай 8-16 для будинку",
+    panelPower: "Потужність на панель (Вт)", panelPowerHint: "Сучасні панелі: 350-550 Вт",
+    efficiency: "Ефективність системи (%)", efficiencyHint: "Залежить від інвертора, орієнтації та затінення",
+    location: "Регіон / Сонячна радіація", loc1: "Нідерланди/Бельгія (Середня)", loc2: "Південна Європа (Висока)", loc3: "Північна Європа (Низька)",
+    roofAngle: "Нахил даху та напрямок", roof1: "Ідеально (Південь, 35°)", roof2: "Добре (ПдСх/ПдЗх, 25-45°)", roof3: "Задовільно (Сх/Зх, 15-55°)", roof4: "Неоптимально (Північ/Плоский)",
+    calculateBtn: "Розрахувати виробіток", infoTitle: "Поради для максимального виробітку",
+    infoText: "• Південна орієнтація (між ПдСх та ПдЗх)<br>• Кут нахилу між 20° та 40°<br>• Забезпечте встановлення без тіні<br>• Якісний інвертор для оптимальної ефективності",
+    resultsTitle: "Результати розрахунку", totalPower: "Загальна потужність", yearlyProduction: "Річний виробіток",
+    dailyProduction: "Добовий виробіток (сер.)", coverageRate: "Рівень покриття", ofConsumption: "від споживання",
+    seasonalChart: "Сезонний виробіток", monthlyChart: "Місячний виробіток",
+    parameter: "Параметр", value: "Значення", impact: "Вплив на виробіток",
+    panelType: "Тип панелі", inverterEff: "Ефективність інвертора", temperature: "Втрати на температуру", systemLoss: "Загальні втрати системи",
+    footer1: "Цей калькулятор дає реалістичну оцінку. Фактичний виробіток може відрізнятися залежно від місцевих умов.",
+    footer2: "© 2026 GroenKlimaat | Для професійної консультації зверніться до сертифікованого монтажника.",
+    privacyLink: "Політика конфіденційності",
+    termsLink: "Умови використання",
+    months: ["Січ","Лют","Бер","Кві","Тра","Чер","Лип","Сер","Вер","Жов","Лис","Гру"],
+    seasons: ["Зима","Весна","Літо","Осінь"]
   }
 };
 
@@ -643,13 +697,11 @@ function changeLanguage(lang) {
   }
 }
 
-// ⭐ BELANGRIJK: Deze functie is aangepast om <br> tags correct te verwerken
 function translatePage() {
   document.querySelectorAll('[data-i18n]').forEach(element => {
     const key = element.getAttribute('data-i18n');
     if (translations[currentLanguage] && translations[currentLanguage][key]) {
       const text = translations[currentLanguage][key];
-      // Check of de tekst HTML bevat (voor <br> tags in infoText en footer)
       if (text.indexOf('<br>') !== -1 || text.indexOf('<b>') !== -1 || text.indexOf('<i>') !== -1) {
         element.innerHTML = text;
       } else {
