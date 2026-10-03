@@ -1,28 +1,75 @@
 {
   "name": "Solar Panel Calculator | GroenKlimaat",
   "short_name": "SolarCalc",
-  "description": "Calculate the yield of your solar panels",
+  "description": "Calculate the exact power and yield of your solar panel system",
   "start_url": "index.html",
   "scope": "/",
   "display": "standalone",
+  "display_override": ["standalone", "minimal-ui", "browser"],
   "background_color": "#F8FAFC",
   "theme_color": "#10B981",
   "orientation": "any",
   "lang": "en",
+  "dir": "ltr",
   "icons": [
     {
       "src": "icon_512x512_192x192.png",
       "sizes": "192x192",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "any"
+    },
+    {
+      "src": "icon_512x512_192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
     },
     {
       "src": "icon_512x512_512x512.png",
       "sizes": "512x512",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "any"
+    },
+    {
+      "src": "icon_512x512_512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
     }
   ],
-  "categories": ["utilities", "productivity"],
-  "privacy_policy": "https://groenklimaat.github.io/Solar-Calculator/privacy.html"
+  "categories": ["utilities", "productivity", "education"],
+  "screenshots": [
+    {
+      "src": "screenshot-wide.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Solar Panel Calculator - Desktop"
+    },
+    {
+      "src": "screenshot-narrow.png",
+      "sizes": "720x1280",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Solar Panel Calculator - Mobile"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Calculate Yield",
+      "short_name": "Calculate",
+      "description": "Start a new solar panel calculation",
+      "url": "index.html?action=calculate",
+      "icons": [{ "src": "icon_512x512_192x192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Privacy Policy",
+      "short_name": "Privacy",
+      "description": "Read our privacy policy",
+      "url": "privacy.html",
+      "icons": [{ "src": "icon_512x512_192x192.png", "sizes": "192x192" }]
+    }
+  ],
+  "privacy_policy": "https://groenklimaat.github.io/Solar-Calculator/privacy.html",
+  "iarc_rating_id": ""
 }
